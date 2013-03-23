@@ -18,5 +18,6 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    DESTINATION share/gnuradio/grc/blocks
+    pulseaudio_pa_sink.xml
+    pulseaudio_pa_source.xml DESTINATION share/gnuradio/grc/blocks
 )

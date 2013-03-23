@@ -22,5 +22,6 @@
 ########################################################################
 install(FILES
     api.h
-    DESTINATION include/pulseaudio
+    pa_sink.h
+    pa_source.h DESTINATION include/pulseaudio
 )
