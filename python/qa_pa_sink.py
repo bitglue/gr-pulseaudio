@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # 
-# Copyright 2013 <+YOU OR YOUR COMPANY+>.
+# Copyright 2013 Phil Frost.
 # 
 # This is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 # Boston, MA 02110-1301, USA.
 # 
 
-from gnuradio import gr, gr_unittest
+from gnuradio import gr, gr_unittest, analog
 import pulseaudio_swig as pulseaudio
 
 class qa_pa_sink (gr_unittest.TestCase):
@@ -30,9 +30,12 @@ class qa_pa_sink (gr_unittest.TestCase):
         self.tb = None
 
     def test_001_t (self):
-        # set up fg
+        left_src = analog.sig_source_f(96000, analog.GR_COS_WAVE, 1000, .2, 0)
+        right_src = analog.sig_source_f(96000, analog.GR_COS_WAVE, 440, .2, 0)
+        sink = pulseaudio.pa_sink(samp_rate=96000, nchannels=2)
+        self.tb.connect((left_src, 0), (sink, 0))
+        self.tb.connect((right_src, 0), (sink, 1))
         self.tb.run ()
-        # check data
 
 
 if __name__ == '__main__':

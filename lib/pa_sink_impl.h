@@ -1,17 +1,17 @@
 /* -*- c++ -*- */
-/* 
- * Copyright 2013 <+YOU OR YOUR COMPANY+>.
- * 
+/*
+ * Copyright 2013 Phil Frost.
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -23,16 +23,22 @@
 
 #include <pulseaudio/pa_sink.h>
 
+#include <pulse/simple.h>
+
 namespace gr {
   namespace pulseaudio {
 
     class pa_sink_impl : public pa_sink
     {
     private:
-      // Nothing to declare in this block.
+      pa_sample_spec sample_spec;
+      pa_simple *pa_connection;
+      int nchannels;
+      int buffer_size;
+      float *audio_buffer;
 
     public:
-      pa_sink_impl();
+      pa_sink_impl(int samp_rate, int nchannels);
       ~pa_sink_impl();
 
       // Where all the action really happens

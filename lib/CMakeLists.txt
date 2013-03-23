@@ -28,7 +28,7 @@ link_directories(${Boost_LIBRARY_DIRS})
 add_library(gnuradio-pulseaudio SHARED
     pa_sink_impl.cc
     pa_source_impl.cc )
-target_link_libraries(gnuradio-pulseaudio ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES})
+target_link_libraries(gnuradio-pulseaudio ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES} ${PULSEAUDIO_LIBRARY} pulse-simple)
 set_target_properties(gnuradio-pulseaudio PROPERTIES DEFINE_SYMBOL "gnuradio_pulseaudio_EXPORTS")
 
 ########################################################################
