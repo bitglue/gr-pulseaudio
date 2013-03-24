@@ -1,38 +1,31 @@
 <?xml version="1.0"?>
 <block>
-  <name>pa_source</name>
+  <name>PulseAudio Source</name>
   <key>pulseaudio_pa_source</key>
-  <category>pulseaudio</category>
+  <category>Sources</category>
   <import>import pulseaudio</import>
-  <make>pulseaudio.pa_source()</make>
-  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
-       Sub-nodes:
-       * name
-       * key (makes the value accessible as $keyname, e.g. in the make node)
-       * type -->
+  <make>pulseaudio.pa_source($samp_rate, $nchannels)</make>
+
   <param>
-    <name>...</name>
-    <key>...</key>
-    <type>...</type>
+    <name>Num Channels</name>
+    <key>nchannels</key>
+    <value>1</value>
+    <type>int</type>
   </param>
 
-  <!-- Make one 'sink' node per input. Sub-nodes:
-       * name (an identifier for the GUI)
-       * type
-       * vlen
-       * optional (set to 1 for optional inputs) -->
-  <sink>
-    <name>in</name>
-    <type><!-- e.g. int, real, complex, byte, short, xxx_vector, ...--></type>
-  </sink>
+  <param>
+    <name>Sample Rate</name>
+    <key>samp_rate</key>
+    <value>samp_rate</value>
+    <type>int</type>
+  </param>
 
-  <!-- Make one 'source' node per output. Sub-nodes:
-       * name (an identifier for the GUI)
-       * type
-       * vlen
-       * optional (set to 1 for optional inputs) -->
+  <check>$nchannels &gt; 0</check>
+  <check>$samp_rate &gt; 0</check>
+
   <source>
     <name>out</name>
-    <type><!-- e.g. int, real, complex, byte, short, xxx_vector, ...--></type>
+    <type>float</type>
+    <nports>$nchannels</nports>
   </source>
 </block>
