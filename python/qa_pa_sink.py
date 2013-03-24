@@ -32,7 +32,12 @@ class qa_pa_sink (gr_unittest.TestCase):
     def test_001_t (self):
         left_src = analog.sig_source_f(96000, analog.GR_COS_WAVE, 1000, .2, 0)
         right_src = analog.sig_source_f(96000, analog.GR_COS_WAVE, 440, .2, 0)
-        sink = pulseaudio.pa_sink(samp_rate=96000, nchannels=2)
+        sink = pulseaudio.pa_sink(
+            samp_rate=96000,
+            nchannels=2,
+            application_name='GNU Radio test',
+            stream_name='test',
+            channel_map=None)
         self.tb.connect((left_src, 0), (sink, 0))
         self.tb.connect((right_src, 0), (sink, 1))
         self.tb.run ()

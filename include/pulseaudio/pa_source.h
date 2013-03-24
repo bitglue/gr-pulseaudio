@@ -46,7 +46,12 @@ namespace gr {
         * class. pulseaudio::pa_source::make is the public interface for
         * creating new instances.
         */
-       static sptr make(int samp_rate, int nchannels);
+       static sptr make(
+          int samp_rate,
+          int nchannels,
+          const char *application_name,
+          const char *stream_name,
+          const char *channel_map);
     };
 
   } // namespace pulseaudio

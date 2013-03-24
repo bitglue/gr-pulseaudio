@@ -18,39 +18,37 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_PULSEAUDIO_PA_SINK_IMPL_H
-#define INCLUDED_PULSEAUDIO_PA_SINK_IMPL_H
-
-#include <pulseaudio/pa_sink.h>
-#include "pa_simple_connection.h"
+#ifndef INCLUDED_PULSEAUDIO_PA_SIMPLE_CONNECTION_H
+#define INCLUDED_PULSEAUDIO_PA_SIMPLE_CONNECTION_H
 
 #include <pulse/simple.h>
+#include <gr_io_signature.h>
 
 namespace gr {
   namespace pulseaudio {
+    class pa_simple_connection {
+      private:
+        pa_sample_spec sample_spec;
+        pa_channel_map channel_map;
+        pa_simple *pa_connection;
+        int nchannels;
+        int buffer_size;
+        float *audio_buffer;
 
-    class pa_sink_impl : public pa_sink
-    {
-    private:
-      pa_simple_connection pa_connection;
+      public:
+        pa_simple_connection(
+            int samp_rate,
+            int nchannels,
+            const char *application_name,
+            pa_stream_direction_t direction,
+            const char *stream_name,
+            const char *channel_map);
+        ~pa_simple_connection();
 
-    public:
-      pa_sink_impl(
-          int samp_rate,
-          int nchannels,
-          const char *application_name,
-          const char *stream_name,
-          const char *channel_map);
-      ~pa_sink_impl();
-
-      // Where all the action really happens
-      int work(int noutput_items,
-	       gr_vector_const_void_star &input_items,
-	       gr_vector_void_star &output_items);
+        int read(gr_vector_void_star &output_items, size_t noutput_items);
+        int write(gr_vector_const_void_star &input_items, size_t noutput_items);
     };
-
   } // namespace pulseaudio
 } // namespace gr
 
-#endif /* INCLUDED_PULSEAUDIO_PA_SINK_IMPL_H */
-
+#endif

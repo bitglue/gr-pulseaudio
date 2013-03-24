@@ -4,7 +4,12 @@
   <key>pulseaudio_pa_source</key>
   <category>Sources</category>
   <import>import pulseaudio</import>
-  <make>pulseaudio.pa_source($samp_rate, $nchannels)</make>
+  <make>pulseaudio.pa_source(
+        samp_rate=$samp_rate,
+        nchannels=$nchannels,
+        application_name=$application_name,
+        stream_name=$stream_name,
+        channel_map=$channel_map or None)</make>
 
   <param>
     <name>Num Channels</name>
@@ -18,6 +23,27 @@
     <key>samp_rate</key>
     <value>samp_rate</value>
     <type>int</type>
+  </param>
+
+  <param>
+    <name>Application Name</name>
+    <key>application_name</key>
+    <value>GNU Radio</value>
+    <type>string</type>
+  </param>
+
+  <param>
+    <name>Stream Name</name>
+    <key>stream_name</key>
+    <value>input</value>
+    <type>string</type>
+  </param>
+
+  <param>
+    <name>Channel Map</name>
+    <key>channel_map</key>
+    <value></value>
+    <type>string</type>
   </param>
 
   <check>$nchannels &gt; 0</check>

@@ -22,6 +22,7 @@
 #define INCLUDED_PULSEAUDIO_PA_SOURCE_IMPL_H
 
 #include <pulseaudio/pa_source.h>
+#include "pa_simple_connection.h"
 
 #include <pulse/simple.h>
 
@@ -31,14 +32,15 @@ namespace gr {
     class pa_source_impl : public pa_source
     {
     private:
-      pa_sample_spec sample_spec;
-      pa_simple *pa_connection;
-      int nchannels;
-      int buffer_size;
-      float *audio_buffer;
+      pa_simple_connection pa_connection;
 
     public:
-      pa_source_impl(int samp_rate, int nchannels);
+      pa_source_impl(
+          int samp_rate,
+          int nchannels,
+          const char *application_name,
+          const char *stream_name,
+          const char *channel_map);
       ~pa_source_impl();
 
       // Where all the action really happens
