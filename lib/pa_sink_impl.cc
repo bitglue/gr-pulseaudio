@@ -33,6 +33,7 @@ namespace gr {
           int samp_rate,
           int nchannels,
           const char *application_name,
+          const char *device,
           const char *stream_name,
           const char *channel_map)
     {
@@ -40,6 +41,7 @@ namespace gr {
             samp_rate,
             nchannels,
             application_name,
+            device,
             stream_name,
             channel_map));
     }
@@ -48,12 +50,13 @@ namespace gr {
           int samp_rate,
           int nchannels,
           const char *application_name,
+          const char *device,
           const char *stream_name,
           const char *channel_map)
       : gr_sync_block("pa_sink",
 		      gr_make_io_signature(nchannels, nchannels, sizeof (float)),
 		      gr_make_io_signature(0, 0, 0)),
-      pa_connection(samp_rate, nchannels, application_name, PA_STREAM_PLAYBACK, stream_name, channel_map)
+      pa_connection(samp_rate, nchannels, application_name, PA_STREAM_PLAYBACK, device, stream_name, channel_map)
     {
       /* empty */
     }

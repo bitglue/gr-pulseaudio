@@ -39,6 +39,7 @@ namespace gr {
           int samp_rate,
           int nchannels,
           const char *application_name,
+          const char *device,
           const char *stream_name,
           const char *channel_map);
       ~pa_sink_impl();

@@ -41,6 +41,7 @@ namespace gr {
             int nchannels,
             const char *application_name,
             pa_stream_direction_t direction,
+            const char *device,
             const char *stream_name,
             const char *channel_map);
         ~pa_simple_connection();

@@ -34,6 +34,7 @@ namespace gr {
         int nchannels,
         const char *application_name,
         pa_stream_direction_t direction,
+        const char *device,
         const char *stream_name,
         const char *channel_map)
     {
@@ -56,7 +57,7 @@ namespace gr {
           NULL,                 // server
           application_name,     // application name
           direction,            // direction
-          NULL,                 // device
+          device,               // device
           stream_name,          // stream name
           &this->sample_spec,   // sample format
           use_channel_map,      // channel map
