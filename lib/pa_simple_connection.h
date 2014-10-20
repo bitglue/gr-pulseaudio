@@ -22,7 +22,7 @@
 #define INCLUDED_PULSEAUDIO_PA_SIMPLE_CONNECTION_H
 
 #include <pulse/simple.h>
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 
 namespace gr {
   namespace pulseaudio {

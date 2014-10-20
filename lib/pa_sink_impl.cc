@@ -22,7 +22,7 @@
 #include "config.h"
 #endif
 
-#include <gr_io_signature.h>
+#include <gnuradio/io_signature.h>
 #include "pa_sink_impl.h"
 
 namespace gr {
@@ -53,9 +53,9 @@ namespace gr {
           const char *device,
           const char *stream_name,
           const char *channel_map)
-      : gr_sync_block("pa_sink",
-		      gr_make_io_signature(nchannels, nchannels, sizeof (float)),
-		      gr_make_io_signature(0, 0, 0)),
+      : gr::sync_block("pa_sink",
+		      gr::io_signature::make(nchannels, nchannels, sizeof (float)),
+		      gr::io_signature::make(0, 0, 0)),
       pa_connection(samp_rate, nchannels, application_name, PA_STREAM_PLAYBACK, device, stream_name, channel_map)
     {
       /* empty */

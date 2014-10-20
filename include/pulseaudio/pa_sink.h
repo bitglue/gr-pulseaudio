@@ -23,7 +23,7 @@
 #define INCLUDED_PULSEAUDIO_PA_SINK_H
 
 #include <pulseaudio/api.h>
-#include <gr_sync_block.h>
+#include <gnuradio/sync_block.h>
 
 namespace gr {
   namespace pulseaudio {
@@ -33,7 +33,7 @@ namespace gr {
      * \ingroup pulseaudio
      *
      */
-    class PULSEAUDIO_API pa_sink : virtual public gr_sync_block
+    class PULSEAUDIO_API pa_sink : virtual public gr::sync_block
     {
     public:
        typedef boost::shared_ptr<pa_sink> sptr;
