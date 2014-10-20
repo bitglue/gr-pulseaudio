@@ -1,7 +1,7 @@
 language: cpp
 
 install:
-  - sudo apt-get install libboost-all-dev
+  - sudo apt-get install libboost-all-dev libpulse-dev
 
 before_script:
   - mkdir build
