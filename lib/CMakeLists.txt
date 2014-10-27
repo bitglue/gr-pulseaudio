@@ -25,7 +25,6 @@ include(GrPlatform) #define LIB_SUFFIX
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
-target_link_libraries(gnuradio-pulseaudio ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES} ${PULSEAUDIO_LIBRARY} pulse-simple)
 list(APPEND pulseaudio_sources
 pa_simple_connection.cc
 pa_sink_impl.cc
