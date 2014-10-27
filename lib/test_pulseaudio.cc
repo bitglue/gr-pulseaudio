@@ -20,12 +20,17 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
 #include <cppunit/TextTestRunner.h>
 #include <cppunit/XmlOutputter.h>
 
-#include <gr_unittests.h>
+#include <gnuradio/unittests.h>
 #include "qa_pulseaudio.h"
 #include <iostream>
+#include <fstream>
 
 int
 main (int argc, char **argv)

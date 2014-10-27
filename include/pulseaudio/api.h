@@ -22,7 +22,7 @@
 #ifndef INCLUDED_PULSEAUDIO_API_H
 #define INCLUDED_PULSEAUDIO_API_H
 
-#include <gruel/attributes.h>
+#include <gnuradio/attributes.h>
 
 #ifdef gnuradio_pulseaudio_EXPORTS
 #  define PULSEAUDIO_API __GR_ATTR_EXPORT

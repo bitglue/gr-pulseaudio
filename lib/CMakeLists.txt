@@ -25,12 +25,28 @@ include(GrPlatform) #define LIB_SUFFIX
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
-add_library(gnuradio-pulseaudio SHARED
-    pa_simple_connection.cc
-    pa_sink_impl.cc
-    pa_source_impl.cc )
 target_link_libraries(gnuradio-pulseaudio ${Boost_LIBRARIES} ${GRUEL_LIBRARIES} ${GNURADIO_CORE_LIBRARIES} ${PULSEAUDIO_LIBRARY} pulse-simple)
+list(APPEND pulseaudio_sources
+pa_simple_connection.cc
+pa_sink_impl.cc
+pa_source_impl.cc
+)
+
+set(pulseaudio_sources "${pulseaudio_sources}" PARENT_SCOPE)
+if(NOT pulseaudio_sources)
+	MESSAGE(STATUS "No C++ sources... skipping lib/")
+	return()
+endif(NOT pulseaudio_sources)
+
+add_library(gnuradio-pulseaudio SHARED ${pulseaudio_sources})
+target_link_libraries(gnuradio-pulseaudio ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES})
 set_target_properties(gnuradio-pulseaudio PROPERTIES DEFINE_SYMBOL "gnuradio_pulseaudio_EXPORTS")
+
+if(APPLE)
+    set_target_properties(gnuradio-pulseaudio PROPERTIES
+        INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/lib"
+    )
+endif(APPLE)
 
 ########################################################################
 # Install built library files
@@ -49,15 +65,15 @@ include(GrTest)
 include_directories(${CPPUNIT_INCLUDE_DIRS})
 
 list(APPEND test_pulseaudio_sources
-  ${CMAKE_CURRENT_SOURCE_DIR}/test_pulseaudio.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/qa_pulseaudio.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/test_pulseaudio.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_pulseaudio.cc
 )
 
 add_executable(test-pulseaudio ${test_pulseaudio_sources})
 
 target_link_libraries(
   test-pulseaudio
-  ${GNURADIO_CORE_LIBRARIES}
+  ${GNURADIO_RUNTIME_LIBRARIES}
   ${Boost_LIBRARIES}
   ${CPPUNIT_LIBRARIES}
   gnuradio-pulseaudio
