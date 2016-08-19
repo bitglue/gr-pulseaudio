@@ -1,0 +1,30 @@
+INCLUDE(FindPkgConfig)
+PKG_CHECK_MODULES(PC_GR_PULSEAUDIO pulseaudio)
+
+FIND_PATH(
+    GR_PULSEAUDIO_INCLUDE_DIRS
+    NAMES gr-pulseaudio/api.h
+    HINTS $ENV{GR_PULSEAUDIO_DIR}/include
+        ${PC_GR_PULSEAUDIO_INCLUDEDIR}
+    PATHS ${CMAKE_INSTALL_PREFIX}/include
+          /usr/local/include
+          /usr/include
+)
+
+FIND_LIBRARY(
+    GR_PULSEAUDIO_LIBRARIES
+    NAMES gnuradio-pulseaudio
+    HINTS $ENV{GR_PULSEAUDIO_DIR}/lib
+        ${PC_GR_PULSEAUDIO_LIBDIR}
+    PATHS ${CMAKE_INSTALL_PREFIX}/lib
+          ${CMAKE_INSTALL_PREFIX}/lib64
+          /usr/local/lib
+          /usr/local/lib64
+          /usr/lib
+          /usr/lib64
+)
+
+INCLUDE(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(GR_PULSEAUDIO DEFAULT_MSG GR_PULSEAUDIO_LIBRARIES GR_PULSEAUDIO_INCLUDE_DIRS)
+MARK_AS_ADVANCED(GR_PULSEAUDIO_LIBRARIES GR_PULSEAUDIO_INCLUDE_DIRS)
+

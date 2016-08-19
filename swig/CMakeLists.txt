@@ -52,7 +52,7 @@ GR_SWIG_MAKE(pulseaudio_swig pulseaudio_swig.i)
 ########################################################################
 # Install the build swig module
 ########################################################################
-GR_SWIG_INSTALL(TARGETS pulseaudio_swig DESTINATION ${GR_PYTHON_DIR}/pulseaudio)
+GR_SWIG_INSTALL(TARGETS pulseaudio_swig DESTINATION ${GR_PYTHON_DIR}/gr_pulseaudio)
 
 ########################################################################
 # Install swig .i files for development
@@ -61,5 +61,5 @@ install(
     FILES
     pulseaudio_swig.i
     ${CMAKE_CURRENT_BINARY_DIR}/pulseaudio_swig_doc.i
-    DESTINATION ${GR_INCLUDE_DIR}/pulseaudio/swig
+    DESTINATION ${GR_INCLUDE_DIR}/gr-pulseaudio/swig
 )

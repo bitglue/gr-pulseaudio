@@ -69,7 +69,7 @@ endif()
 include(GrPlatform) #define LIB_SUFFIX
 set(GR_RUNTIME_DIR      bin)
 set(GR_LIBRARY_DIR      lib${LIB_SUFFIX})
-set(GR_INCLUDE_DIR      include/pulseaudio)
+set(GR_INCLUDE_DIR      include/gr-pulseaudio)
 set(GR_DATA_DIR         share)
 set(GR_PKG_DATA_DIR     ${GR_DATA_DIR}/${CMAKE_PROJECT_NAME})
 set(GR_DOC_DIR          ${GR_DATA_DIR}/doc)
@@ -145,7 +145,7 @@ add_custom_target(uninstall
 ########################################################################
 # Add subdirectories
 ########################################################################
-add_subdirectory(include/pulseaudio)
+add_subdirectory(include/gr-pulseaudio)
 add_subdirectory(lib)
 add_subdirectory(swig)
 add_subdirectory(python)
@@ -156,6 +156,6 @@ add_subdirectory(docs)
 ########################################################################
 # Install cmake search helper for this library
 ########################################################################
-install(FILES cmake/Modules/pulseaudioConfig.cmake
-    DESTINATION lib/cmake/pulseaudio
+install(FILES cmake/Modules/grPulseaudioConfig.cmake
+    DESTINATION lib/cmake/gr-pulseaudio
 )

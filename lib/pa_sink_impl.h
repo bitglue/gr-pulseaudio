@@ -21,7 +21,7 @@
 #ifndef INCLUDED_PULSEAUDIO_PA_SINK_IMPL_H
 #define INCLUDED_PULSEAUDIO_PA_SINK_IMPL_H
 
-#include <pulseaudio/pa_sink.h>
+#include <gr-pulseaudio/pa_sink.h>
 #include "pa_simple_connection.h"
 
 #include <pulse/simple.h>

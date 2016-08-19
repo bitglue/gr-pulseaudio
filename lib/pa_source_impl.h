@@ -21,7 +21,7 @@
 #ifndef INCLUDED_PULSEAUDIO_PA_SOURCE_IMPL_H
 #define INCLUDED_PULSEAUDIO_PA_SOURCE_IMPL_H
 
-#include <pulseaudio/pa_source.h>
+#include <gr-pulseaudio/pa_source.h>
 #include "pa_simple_connection.h"
 
 #include <pulse/simple.h>

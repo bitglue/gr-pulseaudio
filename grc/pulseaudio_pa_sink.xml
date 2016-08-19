@@ -4,8 +4,8 @@
   <key>pulseaudio_pa_sink</key>
   <category>Sinks</category>
   <flags>throttle</flags>
-  <import>import pulseaudio</import>
-  <make>pulseaudio.pa_sink(
+  <import>import gr_pulseaudio</import>
+  <make>gr_pulseaudio.pa_sink(
         samp_rate=$samp_rate,
         nchannels=$nchannels,
         application_name=$application_name,

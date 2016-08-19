@@ -19,10 +19,10 @@
  */
 
 
-#ifndef INCLUDED_PULSEAUDIO_PA_SOURCE_H
-#define INCLUDED_PULSEAUDIO_PA_SOURCE_H
+#ifndef INCLUDED_PULSEAUDIO_PA_SINK_H
+#define INCLUDED_PULSEAUDIO_PA_SINK_H
 
-#include <pulseaudio/api.h>
+#include <gr-pulseaudio/api.h>
 #include <gnuradio/sync_block.h>
 
 namespace gr {
@@ -33,17 +33,17 @@ namespace gr {
      * \ingroup pulseaudio
      *
      */
-    class PULSEAUDIO_API pa_source : virtual public gr::sync_block
+    class PULSEAUDIO_API pa_sink : virtual public gr::sync_block
     {
     public:
-       typedef boost::shared_ptr<pa_source> sptr;
+       typedef boost::shared_ptr<pa_sink> sptr;
 
        /*!
-        * \brief Return a shared_ptr to a new instance of pulseaudio::pa_source.
+        * \brief Return a shared_ptr to a new instance of pulseaudio::pa_sink.
         *
-        * To avoid accidental use of raw pointers, pulseaudio::pa_source's
+        * To avoid accidental use of raw pointers, pulseaudio::pa_sink's
         * constructor is in a private implementation
-        * class. pulseaudio::pa_source::make is the public interface for
+        * class. pulseaudio::pa_sink::make is the public interface for
         * creating new instances.
         */
        static sptr make(
@@ -58,5 +58,5 @@ namespace gr {
   } // namespace pulseaudio
 } // namespace gr
 
-#endif /* INCLUDED_PULSEAUDIO_PA_SOURCE_H */
+#endif /* INCLUDED_PULSEAUDIO_PA_SINK_H */
 

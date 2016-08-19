@@ -23,5 +23,5 @@
 install(FILES
     api.h
     pa_sink.h
-    pa_source.h DESTINATION include/pulseaudio
+    pa_source.h DESTINATION include/gr-pulseaudio
 )
