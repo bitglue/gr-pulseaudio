@@ -3,6 +3,7 @@
   <name>PulseAudio Source</name>
   <key>pulseaudio_pa_source</key>
   <category>Sources</category>
+  <flags>throttle</flags>
   <import>import pulseaudio</import>
   <make>pulseaudio.pa_source(
         samp_rate=$samp_rate,
