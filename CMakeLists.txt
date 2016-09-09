@@ -25,6 +25,8 @@ cmake_minimum_required(VERSION 2.6)
 project(gr-pulseaudio CXX C)
 enable_testing()
 
+find_package(PkgConfig REQUIRED)
+
 #select the release build type by default to get optimization flags
 if(NOT CMAKE_BUILD_TYPE)
    set(CMAKE_BUILD_TYPE "Release")
@@ -84,8 +86,9 @@ set(GRC_BLOCKS_DIR      ${GR_PKG_DATA_DIR}/grc/blocks)
 # Find gnuradio build dependencies
 ########################################################################
 find_package(CppUnit)
-find_package(PulseAudio)
 find_package(Doxygen)
+
+pkg_search_module(LIBPULSE_SIMPLE REQUIRED libpulse-simple)
 
 # Search for GNU Radio and its components and versions. Add any
 # components required to the list of GR_REQUIRED_COMPONENTS (in all
@@ -118,12 +121,14 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
     ${CPPUNIT_INCLUDE_DIRS}
     ${GNURADIO_ALL_INCLUDE_DIRS}
+    ${LIBPULSE_SIMPLE_INCLUDE_DIRS}
 )
 
 link_directories(
     ${Boost_LIBRARY_DIRS}
     ${CPPUNIT_LIBRARY_DIRS}
     ${GNURADIO_RUNTIME_LIBRARY_DIRS}
+    ${LIBPULSE_SIMPLE_LIBRARY_DIRS}
 )
 
 # Set component parameters
