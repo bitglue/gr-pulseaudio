@@ -36,6 +36,7 @@ class qa_pa_sink (gr_unittest.TestCase):
             samp_rate=96000,
             nchannels=2,
             application_name='GNU Radio test',
+            device=None,
             stream_name='test',
             channel_map=None)
         self.tb.connect((left_src, 0), (sink, 0))
