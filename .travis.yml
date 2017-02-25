@@ -1,7 +1,7 @@
 language: cpp
 
 install:
-  - sudo apt-add-repository -y ppa:gqrx/releases
+    #  - sudo apt-add-repository -y ppa:gqrx/releases
   - sudo apt-get update -y
   - sudo apt-get install -y libboost-all-dev libpulse-dev gnuradio-dev libcppunit-dev liblog4cpp5-dev
   - sudo apt-get install -y $(apt-cache search -n libgnuradio-runtime | awk '{print $1}' | tail -n 1)
