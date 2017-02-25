@@ -55,8 +55,16 @@
     <type>string</type>
   </param>
 
+  <param>
+    <name>Desired Latency</name>
+    <key>latency</key>
+    <value></value>
+    <type>float</type>
+  </param>
+
   <check>$nchannels &gt; 0</check>
   <check>$samp_rate &gt; 0</check>
+  <check>$latency &gt; 0</check>
 
   <source>
     <name>out</name>

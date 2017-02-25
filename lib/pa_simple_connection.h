@@ -30,6 +30,7 @@ namespace gr {
       private:
         pa_sample_spec sample_spec;
         pa_channel_map channel_map;
+        pa_buffer_attr buffer_attr;
         pa_simple *pa_connection;
         int nchannels;
         int buffer_size;
@@ -43,7 +44,8 @@ namespace gr {
             pa_stream_direction_t direction,
             const char *device,
             const char *stream_name,
-            const char *channel_map);
+            const char *channel_map,
+            float latency);
         ~pa_simple_connection();
 
         int read(gr_vector_void_star &output_items, size_t noutput_items);

@@ -35,7 +35,8 @@ namespace gr {
           const char *application_name,
           const char *device,
           const char *stream_name,
-          const char *channel_map)
+          const char *channel_map,
+          float latency)
     {
       return gnuradio::get_initial_sptr (new pa_sink_impl(
             samp_rate,
@@ -43,7 +44,8 @@ namespace gr {
             application_name,
             device,
             stream_name,
-            channel_map));
+            channel_map,
+            latency));
     }
 
     pa_sink_impl::pa_sink_impl(
@@ -52,11 +54,12 @@ namespace gr {
           const char *application_name,
           const char *device,
           const char *stream_name,
-          const char *channel_map)
+          const char *channel_map,
+          float latency)
       : gr::sync_block("pa_sink",
 		      gr::io_signature::make(nchannels, nchannels, sizeof (float)),
 		      gr::io_signature::make(0, 0, 0)),
-      pa_connection(samp_rate, nchannels, application_name, PA_STREAM_PLAYBACK, device, stream_name, channel_map)
+      pa_connection(samp_rate, nchannels, application_name, PA_STREAM_PLAYBACK, device, stream_name, channel_map, latency)
     {
       /* empty */
     }

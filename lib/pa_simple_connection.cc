@@ -36,7 +36,8 @@ namespace gr {
         pa_stream_direction_t direction,
         const char *device,
         const char *stream_name,
-        const char *channel_map)
+        const char *channel_map,
+        float latency)
     {
       this->nchannels = nchannels;
       this->buffer_size = samp_rate / 4;        // enough working space for 250ms of audio
@@ -53,16 +54,25 @@ namespace gr {
         use_channel_map = &this->channel_map;
       }
 
+      if (latency) {
+        size_t bytes = pa_usec_to_bytes((pa_usec_t)(latency*1000), &sample_spec);
+        if (direction = PA_STREAM_PLAYBACK) {
+          buffer_attr = {-1, bytes, -1, -1, -1};
+        } else {
+          buffer_attr = {-1, -1, -1, -1, bytes};
+        }
+      }
+
       pa_connection = pa_simple_new(
-          NULL,                 // server
-          application_name,     // application name
-          direction,            // direction
-          device,               // device
-          stream_name,          // stream name
-          &this->sample_spec,   // sample format
-          use_channel_map,      // channel map
-          NULL,                 // buffering
-          NULL);                // error code
+          NULL,                         // server
+          application_name,             // application name
+          direction,                    // direction
+          device,                       // device
+          stream_name,                  // stream name
+          &this->sample_spec,           // sample format
+          use_channel_map,              // channel map
+          latency?&buffer_attr:NULL,    // buffering
+          NULL);                        // error code
     }
 
     pa_simple_connection::~pa_simple_connection()

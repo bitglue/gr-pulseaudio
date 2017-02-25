@@ -41,7 +41,8 @@ namespace gr {
           const char *application_name,
           const char *device,
           const char *stream_name,
-          const char *channel_map);
+          const char *channel_map,
+          float latency);
       ~pa_source_impl();
 
       // Where all the action really happens
