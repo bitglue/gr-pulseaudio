@@ -11,7 +11,8 @@
         application_name=$application_name,
         device=$device or None,
         stream_name=$stream_name,
-        channel_map=$channel_map or None)</make>
+        channel_map=$channel_map or None,
+        latency=$latency or None)</make>
 
   <param>
     <name>Num Channels</name>
