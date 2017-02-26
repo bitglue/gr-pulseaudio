@@ -66,16 +66,16 @@ namespace gr {
       buffer_attr.fragsize = -1;
       if (latency) {
         size_t bytes = pa_usec_to_bytes((pa_usec_t)(latency*1000), &sample_spec);
-        std::cerr << bytes;
-        std::cerr << "\n";
         if (direction = PA_STREAM_PLAYBACK) {
           buffer_attr.tlength = bytes;
+          std::cerr << "playback: " << bytes;
         } else {
+          std::cerr << "recording: " << bytes;
           buffer_attr.fragsize = bytes;
         }
       }
 
-      std::cerr << "creating PulseAudio connection 3\n";
+      std::cerr << "creating PulseAudio connection 4\n";
 
       pa_connection = pa_simple_new(
           NULL,                 // server
