@@ -81,7 +81,7 @@ namespace gr {
           NULL,                 // server
           application_name,     // application name
           direction,            // direction
-          NULL  ,               // device
+          device,               // device
           stream_name,          // stream name
           &this->sample_spec,   // sample format
           use_channel_map,      // channel map
