@@ -73,6 +73,8 @@ namespace gr {
         }
       }
 
+      std:cerr << "creating PulseAudio connection\n";
+
       pa_connection = pa_simple_new(
           NULL,                 // server
           application_name,     // application name
@@ -85,6 +87,7 @@ namespace gr {
           &error);              // error code
 
       if (pa_connection == NULL) {
+        std::cerr << "error creating PulseAudio connection:\n";
         std::cerr << pa_strerror(error);
       }
     }
