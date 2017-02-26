@@ -73,13 +73,13 @@ namespace gr {
         }
       }
 
-      std::cerr << "creating PulseAudio connection\n";
+      std::cerr << "creating PulseAudio connection 2\n";
 
       pa_connection = pa_simple_new(
           NULL,                 // server
           application_name,     // application name
           direction,            // direction
-          device,               // device
+          NULL  ,               // device
           stream_name,          // stream name
           &this->sample_spec,   // sample format
           use_channel_map,      // channel map
@@ -89,6 +89,7 @@ namespace gr {
       if (pa_connection == NULL) {
         std::cerr << "error creating PulseAudio connection:\n";
         std::cerr << pa_strerror(error);
+        std::cerr << "\n";
       }
     }
 
