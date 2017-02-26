@@ -22,10 +22,13 @@
 #include "config.h"
 #endif
 
+#include <iostream>
+
 #include <gnuradio/io_signature.h>
 #include "pa_simple_connection.h"
 
 #include <pulse/channelmap.h>
+#include <pulse/error.h>
 
 namespace gr {
   namespace pulseaudio {
@@ -39,6 +42,8 @@ namespace gr {
         const char *channel_map,
         float latency)
     {
+      int error;
+
       this->nchannels = nchannels;
       this->buffer_size = samp_rate / 4;        // enough working space for 250ms of audio
       this->audio_buffer = new float[buffer_size*nchannels];
@@ -54,25 +59,34 @@ namespace gr {
         use_channel_map = &this->channel_map;
       }
 
+      buffer_attr.maxlength = -1;
+      buffer_attr.tlength = -1;
+      buffer_attr.prebuf = -1;
+      buffer_attr.minreq = -1;
+      buffer_attr.fragsize = -1;
       if (latency) {
         size_t bytes = pa_usec_to_bytes((pa_usec_t)(latency*1000), &sample_spec);
         if (direction = PA_STREAM_PLAYBACK) {
-          buffer_attr = {-1, bytes, -1, -1, -1};
+          buffer_attr.tlength = bytes;
         } else {
-          buffer_attr = {-1, -1, -1, -1, bytes};
+          buffer_attr.fragsize = bytes;
         }
       }
 
       pa_connection = pa_simple_new(
-          NULL,                         // server
-          application_name,             // application name
-          direction,                    // direction
-          device,                       // device
-          stream_name,                  // stream name
-          &this->sample_spec,           // sample format
-          use_channel_map,              // channel map
-          latency?&buffer_attr:NULL,    // buffering
-          NULL);                        // error code
+          NULL,                 // server
+          application_name,     // application name
+          direction,            // direction
+          device,               // device
+          stream_name,          // stream name
+          &this->sample_spec,   // sample format
+          use_channel_map,      // channel map
+          &buffer_attr,         // buffering
+          &error);              // error code
+
+      if (pa_connection == NULL) {
+        std::cerr << pa_strerror(error);
+      }
     }
 
     pa_simple_connection::~pa_simple_connection()
