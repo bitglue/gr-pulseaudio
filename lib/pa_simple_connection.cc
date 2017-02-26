@@ -64,14 +64,16 @@ namespace gr {
       buffer_attr.prebuf = -1;
       buffer_attr.minreq = -1;
       buffer_attr.fragsize = -1;
-      //if (latency) {
-      //  size_t bytes = pa_usec_to_bytes((pa_usec_t)(latency*1000), &sample_spec);
-      //  if (direction = PA_STREAM_PLAYBACK) {
-      //    buffer_attr.tlength = bytes;
-      //  } else {
-      //    buffer_attr.fragsize = bytes;
-      //  }
-      //}
+      if (latency) {
+        size_t bytes = pa_usec_to_bytes((pa_usec_t)(latency*1000), &sample_spec);
+        std::cerr << bytes;
+        std::cerr << "\n";
+        if (direction = PA_STREAM_PLAYBACK) {
+          buffer_attr.tlength = bytes;
+        } else {
+          buffer_attr.fragsize = bytes;
+        }
+      }
 
       std::cerr << "creating PulseAudio connection 3\n";
 
