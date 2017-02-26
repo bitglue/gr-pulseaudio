@@ -73,7 +73,7 @@ namespace gr {
         }
       }
 
-      std:cerr << "creating PulseAudio connection\n";
+      std::cerr << "creating PulseAudio connection\n";
 
       pa_connection = pa_simple_new(
           NULL,                 // server
