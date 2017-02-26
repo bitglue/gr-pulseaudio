@@ -66,11 +66,11 @@ namespace gr {
       buffer_attr.fragsize = -1;
       if (latency) {
         size_t bytes = pa_usec_to_bytes((pa_usec_t)(latency*1000), &sample_spec);
-        if (direction = PA_STREAM_PLAYBACK) {
+        if (direction == PA_STREAM_PLAYBACK) {
           buffer_attr.tlength = bytes;
-          std::cerr << "playback: " << bytes;
+          std::cerr << "playback: " << bytes << "\n";
         } else {
-          std::cerr << "recording: " << bytes;
+          std::cerr << "recording: " << bytes << "\n";
           buffer_attr.fragsize = bytes;
         }
       }
